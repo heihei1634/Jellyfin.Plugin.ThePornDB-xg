@@ -253,8 +253,8 @@ namespace ThePornDB.Providers
             };
 
 // 取得背景图大小
-            float backImageWith = 0;
-            float backImageHeight = 0;
+            var backImageWith = 0;
+            var backImageHeight = 0;
             foreach (var image in images)
             {
                 if (string.IsNullOrEmpty(image.Url))
