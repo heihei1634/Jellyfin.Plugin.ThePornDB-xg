@@ -252,6 +252,9 @@ namespace ThePornDB.Providers
                 (ImageType.Backdrop, (string)sceneData["background"]["large"]),
             };
 
+// 取得背景图大小
+            var backImageWith = 0
+            var backImageHeight = 0
             foreach (var image in images)
             {
                 if (string.IsNullOrEmpty(image.Url))
@@ -266,15 +269,30 @@ namespace ThePornDB.Providers
                 };
 
                 var reg = RegExImageSize.Match(image.Url);
-                if (reg.Success)
+                if (reg.Success && image.Type == ImageType.Backdrop)
                 {
-                    res.Width = int.Parse(reg.Groups["Width"].Value);
-                    res.Height = int.Parse(reg.Groups["Height"].Value);
+                    backImageWith = int.Parse(reg.Groups["Width"].Value);
+                    backImageHeight = int.Parse(reg.Groups["Height"].Value);
                 }
+            }
+
+            foreach (var image in images)
+            {
+                if (string.IsNullOrEmpty(image.Url))
+                {
+                    continue;
+                }
+
+                var res = new RemoteImageInfo
+                {
+                    Url = image.Url,
+                    Type = image.Type,
+                    Width = backImageWith,
+                    Height = backImageHeight
+                };
 
                 result.Add(res);
             }
-
             return result;
         }
 
