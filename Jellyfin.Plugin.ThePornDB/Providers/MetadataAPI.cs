@@ -288,7 +288,7 @@ namespace ThePornDB.Providers
                     Url = image.Url,
                     Type = image.Type,
                     Width = backImageWith,
-                    Height = backImageHeight
+                    Height = backImageHeight,
                 };
 
                 result.Add(res);
